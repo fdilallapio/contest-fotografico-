@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import { formatWinnersAnnouncement } from "@/lib/contest-phase";
 import { PRIMARY_BUTTON, INPUT_CLASS } from "@/lib/ui";
@@ -138,12 +139,33 @@ export default function UploadPhaseView({
 
   if (success) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-        <h1 className="text-3xl font-extrabold text-primary">Candidatura ricevuta!</h1>
-        <p className="mt-3 max-w-md text-muted">
-          Grazie per aver partecipato. Le tue foto sono in fase di revisione e saranno visibili durante la
-          votazione pubblica.
-        </p>
+      <div className="flex min-h-screen items-center justify-center px-4 py-12">
+        <div className="w-full max-w-sm rounded-3xl border-t-4 border-t-accent-green bg-card p-8 text-center shadow-xl">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent-green/15">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-8 w-8 text-accent-green"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="mt-5 text-xl font-extrabold uppercase tracking-wide text-foreground">
+            Candidatura confermata
+          </h1>
+          <p className="mt-3 text-sm text-muted">
+            Grazie per aver partecipato. Le tue foto sono in fase di revisione e saranno visibili durante la
+            votazione pubblica.
+          </p>
+          <Link href="/" className={`mt-6 inline-flex ${PRIMARY_BUTTON}`}>
+            Torna alla home
+          </Link>
+        </div>
       </div>
     );
   }
