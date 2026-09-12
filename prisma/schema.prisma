@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model ContestConfig {
+  id            String    @id @default(cuid())
+  uploadStart   DateTime
+  uploadEnd     DateTime
+  votingEnd     DateTime
+  eventDate     DateTime?
+  eventLocation String?
+  updatedAt     DateTime  @updatedAt
+}
+
+model Theme {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  name      String
+  unlockDay Int
+  order     Int     @default(0)
+  photos    Photo[]
+}
+
+model Candidate {
+  id         String   @id @default(cuid())
+  firstName  String
+  lastName   String
+  email      String   @unique
+  phone      String
+  location   String
+
+  gdprConsent  Boolean
+  rulesConsent Boolean
+  consentIp    String
+  consentAt    DateTime @default(now())
+
+  confirmationEmailSentAt DateTime?
+  resultsEmailSentAt      DateTime?
+
+  photos    Photo[]
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  themeId String
+  theme   Theme  @relation(fields: [themeId], references: [id])
+
+  description String
+
+  originalKey  String
+  originalMime String
+
+  thumbKey  String?
+  mediumKey String?
+  fullKey   String?
+
+  // PENDING | PROCESSING | READY | REJECTED
+  status    String @default("PENDING")
+  voteCount Int    @default(0)
+  // conteggio manuale inserito dall'admin dopo lo spoglio del voto in piazza;
+  // il totale mostrato al pubblico è voteCount (online) + piazzaVotes
+  piazzaVotes Int  @default(0)
+
+  createdAt DateTime @default(now())
+  votes     Vote[]
+
+  @@index([themeId, status])
+  @@index([candidateId])
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  photoId   String
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  // email di chi vota: non verificata (stessa fiducia del form candidatura),
+  // usata solo per impedire più voti sulla stessa foto dalla stessa persona
+  email     String
+  voterHash String
+  createdAt DateTime @default(now())
+
+  @@unique([photoId, email])
+  @@index([photoId])
+  @@index([voterHash, photoId])
+}
