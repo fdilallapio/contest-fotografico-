@@ -58,7 +58,7 @@ export default async function HomePage() {
         <div className="relative z-10">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted">Contest Fotografico</p>
           <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-extrabold text-primary sm:text-6xl">
-            Ma&apos; ndo vajë? Fermati e scatta.
+            Ma&apos;ndo vajë? Fermati e scatta.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base text-foreground/80 sm:text-lg">
             Andare via, restare o tornare? Durante ComUnità parleremo con voi di Sanità, Urbanistica,

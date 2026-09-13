@@ -32,13 +32,13 @@ export default function VotazioniPageClient({ config }: { config: ContestConfigL
         Si vota dal {formatDayDate(phase.endsAt)}
       </h1>
       <p className="mx-auto mt-3 max-w-md text-muted">
-        Le candidature sono ancora aperte: le votazioni inizieranno subito dopo la loro chiusura.
+        La partecipazione è ancora aperta: le votazioni inizieranno subito dopo la sua chiusura.
       </p>
       <div className="mt-8 flex justify-center">
         <Countdown target={phase.endsAt} />
       </div>
       <Link href="/candidati" className={`mt-8 ${SECONDARY_BUTTON}`}>
-        Candidati intanto con le tue foto
+        Invia intanto le tue foto
       </Link>
     </div>
   );

@@ -57,7 +57,7 @@ function layout(title: string, bodyHtml: string): string {
           ${bodyHtml}
         </td></tr>
         <tr><td style="padding:20px 32px;background:${COLOR.background};border-top:1px solid ${COLOR.border};">
-          <span style="color:${COLOR.muted};font-size:12px;">Ricevi questa email perché ti sei candidato/a al contest fotografico.</span>
+          <span style="color:${COLOR.muted};font-size:12px;">Ricevi questa email perché hai partecipato al contest fotografico.</span>
         </td></tr>
       </table>
     </td></tr>
@@ -114,21 +114,21 @@ export function submissionConfirmationEmail({
   const bodyHtml = `
     <p style="margin:0 0 16px;font-size:18px;font-weight:700;color:${COLOR.foreground};">Ciao ${escapeHtml(firstName)},</p>
     <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:${COLOR.foreground};">
-      grazie per aver partecipato al contest fotografico! Abbiamo ricevuto la tua candidatura con
+      grazie per aver partecipato al contest fotografico! Abbiamo ricevuto le tue foto:
       <strong>${totalPhotos} foto</strong> su ${themes.length} tem${themes.length === 1 ? "a" : "i"}.
     </p>
-    <p style="margin:0 0 10px;font-size:14px;font-weight:700;color:${COLOR.foreground};">Riepilogo della candidatura</p>
+    <p style="margin:0 0 10px;font-size:14px;font-weight:700;color:${COLOR.foreground};">Riepilogo delle foto inviate</p>
     ${themesHtml}
     <p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:${COLOR.foreground};">
       Le tue foto sono ora in fase di revisione. Una volta approvate, parteciperanno alla votazione pubblica:
       si potrà votare online sul sito e di persona in Piazza Duomo (Melfi), durante i giorni di ComUnità.
-      Tutte le foto candidate verranno inoltre stampate ed esposte in piazza come installazione permanente.
+      Tutte le foto inviate verranno inoltre stampate ed esposte in piazza come installazione permanente.
       Ti terremo aggiornato/a.
     </p>
     <p style="margin:20px 0 0;font-size:14px;color:${COLOR.foreground};">Grazie ancora per il tuo contributo,<br>Il team di ComUnità</p>
   `;
 
-  return { subject: "Candidatura ricevuta — Contest Fotografico", html: layout("Candidatura ricevuta", bodyHtml) };
+  return { subject: "Partecipazione ricevuta — Contest Fotografico", html: layout("Partecipazione ricevuta", bodyHtml) };
 }
 
 export interface ResultsPhotoRecap {

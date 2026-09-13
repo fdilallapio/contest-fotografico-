@@ -128,7 +128,7 @@ export default function UploadPhaseView({
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        setError(typeof body.error === "string" ? body.error : "Errore nell'invio della candidatura");
+        setError(typeof body.error === "string" ? body.error : "Errore nell'invio delle tue foto");
         return;
       }
       setSuccess(true);
@@ -156,7 +156,7 @@ export default function UploadPhaseView({
             </svg>
           </div>
           <h1 className="mt-5 text-xl font-extrabold uppercase tracking-wide text-foreground">
-            Candidatura confermata
+            Partecipazione confermata
           </h1>
           <p className="mt-3 text-sm text-muted">
             Grazie per aver partecipato. Le tue foto sono in fase di revisione e saranno visibili durante la
@@ -173,10 +173,10 @@ export default function UploadPhaseView({
   return (
     <div className="min-h-screen pb-24 text-foreground">
       <section className="border-b border-border px-4 py-14 text-center sm:py-20">
-        <p className="text-sm font-semibold uppercase tracking-widest text-muted">Candidature aperte</p>
-        <h1 className="mt-3 text-3xl font-extrabold text-primary sm:text-5xl">Invia la tua candidatura</h1>
+        <p className="text-sm font-semibold uppercase tracking-widest text-muted">Partecipazione aperta</p>
+        <h1 className="mt-3 text-3xl font-extrabold text-primary sm:text-5xl">Invia le tue foto</h1>
         <p className="mx-auto mt-4 max-w-xl text-foreground/80">
-          Compila i tuoi dati e carica le foto sui temi che preferisci prima della chiusura delle candidature.
+          Compila i tuoi dati e carica le foto sui temi che preferisci prima della chiusura della partecipazione.
         </p>
         <div className="mt-8 flex justify-center">
           <Countdown target={deadline} />
@@ -289,7 +289,7 @@ export default function UploadPhaseView({
         {error && <p className="text-sm font-medium text-primary">{error}</p>}
 
         <button type="submit" disabled={submitting} className={`w-full ${PRIMARY_BUTTON}`}>
-          {submitting ? "Invio in corso..." : "Invia candidatura"}
+          {submitting ? "Invio in corso..." : "Invia le tue foto"}
         </button>
       </form>
     </div>

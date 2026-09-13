@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/candidati", label: "Candidati" },
+  { href: "/candidati", label: "Partecipa" },
   { href: "/votazioni", label: "Votazioni" },
   { href: "/info-e-contatti", label: "Info e contatti" },
 ];

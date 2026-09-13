@@ -48,7 +48,7 @@ export default function InfoEContattiPage() {
           <li>· La votazione online è pubblica e libera su tutti i temi: non è richiesta registrazione.</li>
           <li>· Si vota anche in piazza, oltre che online.</li>
           <li>
-            · Vincono tutti: ogni foto candidata viene stampata ed esposta in Piazza Duomo (Melfi) come
+            · Vincono tutti: ogni foto inviata viene stampata ed esposta in Piazza Duomo (Melfi) come
             installazione permanente.
           </li>
         </ul>
@@ -59,17 +59,17 @@ export default function InfoEContattiPage() {
         <p className="text-sm leading-relaxed text-foreground/80">
           Vai alla pagina{" "}
           <a href="/candidati" className="font-semibold text-primary underline underline-offset-2">
-            Candidati
+            Partecipa
           </a>
-          , compila i tuoi dati e carica le tue foto sui temi che preferisci prima della chiusura delle
-          candidature. Riceverai un&apos;email di conferma con il riepilogo di quanto inviato.
+          , compila i tuoi dati e carica le tue foto sui temi che preferisci prima della chiusura della
+          partecipazione. Riceverai un&apos;email di conferma con il riepilogo di quanto inviato.
         </p>
       </section>
 
       <section className="mt-14 space-y-4">
         <h2 className="text-lg font-bold text-foreground">Privacy e trattamento dati</h2>
         <p className="text-sm leading-relaxed text-foreground/80">
-          I dati anagrafici raccolti in fase di candidatura sono trattati esclusivamente per la gestione del
+          I dati anagrafici raccolti in fase di partecipazione sono trattati esclusivamente per la gestione del
           contest, nel rispetto del GDPR. Il voto pubblico non richiede alcun dato personale.
         </p>
       </section>

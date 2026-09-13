@@ -18,12 +18,12 @@ export default function CandidatiPageClient({ config }: { config: ContestConfigL
   const message =
     phase.phase === "VOTING"
       ? {
-          title: "Le candidature sono chiuse",
+          title: "La partecipazione è chiusa",
           body: "La raccolta delle foto è terminata: è in corso la votazione pubblica.",
           cta: { href: "/votazioni", label: "Vai alle votazioni" },
         }
       : {
-          title: "Le candidature sono chiuse",
+          title: "La partecipazione è chiusa",
           body: "Questa edizione del contest si è conclusa. Segui la pagina Info e contatti per le prossime edizioni.",
           cta: { href: "/", label: "Torna alla home" },
         };

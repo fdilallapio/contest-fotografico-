@@ -12,13 +12,13 @@ export default function HomePhaseBanner({ config }: { config: ContestConfigLike 
   if (phase.phase === "UPLOAD") {
     return (
       <div className="mt-10 flex flex-col items-center gap-6">
-        <p className="text-sm text-muted">Le candidature chiudono tra:</p>
+        <p className="text-sm text-muted">La partecipazione chiude tra:</p>
         <Countdown target={phase.endsAt} />
         <p className="max-w-xs text-center text-xs text-muted">
-          Partecipazione libera e aperta a tutte e tutti. Scegli una categoria e candidati subito.
+          Partecipazione libera e aperta a tutte e tutti. Scegli una categoria e invia le tue foto subito.
         </p>
         <Link href="/candidati" className={PRIMARY_BUTTON}>
-          Candidati ora
+          Partecipa ora
         </Link>
       </div>
     );
