@@ -121,8 +121,9 @@ export function submissionConfirmationEmail({
     ${themesHtml}
     <p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:${COLOR.foreground};">
       Le tue foto sono ora in fase di revisione. Una volta approvate, parteciperanno alla votazione pubblica:
-      si potrà votare online sul sito e di persona in Piazza Duomo (Melfi), durante i giorni di ComUnità.
-      Tutte le foto inviate verranno inoltre stampate ed esposte in piazza come installazione permanente.
+      si potrà votare online sul sito, anche scansionando un QR code a Piazza Duomo (Melfi) durante i giorni
+      di ComUnità. Tutte le foto inviate verranno inoltre stampate ed esposte in piazza come installazione
+      permanente.
       Ti terremo aggiornato/a.
     </p>
     <p style="margin:20px 0 0;font-size:14px;color:${COLOR.foreground};">Grazie ancora per il tuo contributo,<br>Il team di ComUnità</p>

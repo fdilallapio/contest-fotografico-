@@ -46,7 +46,7 @@ export default function InfoEContattiPage() {
           <li>· Fino a 2 foto per tema, con una breve descrizione per ciascuna (luogo, data, significato, altro).</li>
           <li>· Formati accettati: JPEG, PNG, WEBP, HEIC.</li>
           <li>· La votazione online è pubblica e libera su tutti i temi: non è richiesta registrazione.</li>
-          <li>· Si vota anche in piazza, oltre che online.</li>
+          <li>· A Piazza Duomo (Melfi) si potrà votare scansionando un QR code, sempre attraverso il sito.</li>
           <li>
             · Vincono tutti: ogni foto inviata viene stampata ed esposta in Piazza Duomo (Melfi) come
             installazione permanente.
