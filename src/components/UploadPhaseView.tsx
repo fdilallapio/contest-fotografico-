@@ -273,7 +273,7 @@ export default function UploadPhaseView({
             <span>
               Dichiaro di aver letto e accettato{" "}
               <a
-                href="/regolamento-contest-fotografico.docx"
+                href="/regolamento-contest-fotografico.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}

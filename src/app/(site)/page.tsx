@@ -16,7 +16,7 @@ const STEPS = [
   {
     n: "2",
     title: "Vota",
-    body: "Per 4 giorni (17-20 settembre) si vota online tramite sito. Per 3 giorni (18-20 settembre) si vota anche in Piazza Duomo (Melfi), dove saranno stampate ed esposte tutte le foto dei partecipanti durante i tre giorni di ComUnità. Vengono poi sommati sia i voti online che quelli di piazza.",
+    body: "Per 4 giorni (17-20 settembre) si vota online tramite il sito, un voto per foto.",
   },
   {
     n: "3",
