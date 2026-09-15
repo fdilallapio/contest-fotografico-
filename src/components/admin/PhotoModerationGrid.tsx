@@ -15,6 +15,8 @@ interface Photo {
   voteCount: number;
   piazzaVotes: number;
   thumbKey: string | null;
+  mediumKey: string | null;
+  fullKey: string | null;
   createdAt: string;
   theme: { slug: string; name: string };
   candidate: { firstName: string; lastName: string; email: string };
@@ -41,6 +43,16 @@ export default function PhotoModerationGrid({ themes }: { themes: Theme[] }) {
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [piazzaDraft, setPiazzaDraft] = useState<Record<string, string>>({});
+  const [lightboxPhoto, setLightboxPhoto] = useState<Photo | null>(null);
+
+  useEffect(() => {
+    if (!lightboxPhoto) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setLightboxPhoto(null);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [lightboxPhoto]);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -133,7 +145,19 @@ export default function PhotoModerationGrid({ themes }: { themes: Theme[] }) {
               <div key={photo.id} className="overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900">
                 <div className="relative aspect-[4/3] bg-neutral-800">
                   {photo.thumbKey ? (
-                    <Image src={photo.thumbKey} alt={photo.description} fill className="object-cover" unoptimized />
+                    <button
+                      type="button"
+                      onClick={() => setLightboxPhoto(photo)}
+                      className="group absolute inset-0 h-full w-full cursor-zoom-in"
+                    >
+                      <Image src={photo.thumbKey} alt={photo.description} fill className="object-cover" unoptimized />
+                      <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition group-hover:bg-black/30 group-hover:opacity-100">
+                        <svg viewBox="0 0 24 24" className="h-7 w-7 text-white" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <circle cx="11" cy="11" r="7" />
+                          <path d="M21 21l-4.3-4.3M9 11h4M11 9v4" strokeLinecap="round" />
+                        </svg>
+                      </span>
+                    </button>
                   ) : (
                     <div className="flex h-full items-center justify-center text-xs text-neutral-500">
                       Elaborazione in corso
@@ -203,6 +227,35 @@ export default function PhotoModerationGrid({ themes }: { themes: Theme[] }) {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {lightboxPhoto && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          onClick={() => setLightboxPhoto(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxPhoto(null)}
+            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            aria-label="Chiudi"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          </button>
+          <div className="flex max-h-full max-w-full flex-col items-center gap-3" onClick={(e) => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={lightboxPhoto.fullKey ?? lightboxPhoto.mediumKey ?? lightboxPhoto.thumbKey ?? undefined}
+              alt={lightboxPhoto.description}
+              className="max-h-[80vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+            />
+            <p className="max-w-[90vw] whitespace-pre-line text-center text-sm text-neutral-300">
+              {lightboxPhoto.description}
+            </p>
+          </div>
         </div>
       )}
     </div>
