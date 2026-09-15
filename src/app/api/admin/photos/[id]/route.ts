@@ -13,6 +13,16 @@ const BodySchema = z
     message: "Nessun campo da aggiornare",
   });
 
+/** Removes original + derived files from R2. Doesn't touch the DB row. */
+async function deletePhotoFiles(photo: { originalKey: string; thumbKey: string | null; mediumKey: string | null; fullKey: string | null }) {
+  await deleteOriginal(photo.originalKey);
+  await Promise.all([
+    deleteDerivedByPublicUrl(photo.thumbKey),
+    deleteDerivedByPublicUrl(photo.mediumKey),
+    deleteDerivedByPublicUrl(photo.fullKey),
+  ]);
+}
+
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -24,10 +34,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Richiesta non valida" }, { status: 400 });
   }
 
+  // Rigettare una foto elimina anche i file da R2 (non è reversibile: per
+  // ripubblicarla il partecipante dovrebbe ricaricarla da capo).
+  if (parsed.data.status === "REJECTED") {
+    const existing = await prisma.photo.findUnique({ where: { id } });
+    if (existing) await deletePhotoFiles(existing);
+  }
+
   const photo = await prisma.photo.update({
     where: { id },
     data: {
       ...(parsed.data.status !== undefined ? { status: parsed.data.status } : {}),
+      ...(parsed.data.status === "REJECTED" ? { thumbKey: null, mediumKey: null, fullKey: null } : {}),
       ...(parsed.data.piazzaVotes !== undefined ? { piazzaVotes: parsed.data.piazzaVotes } : {}),
     },
   });
@@ -47,12 +65,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   }
 
   await prisma.photo.delete({ where: { id } });
-  await deleteOriginal(photo.originalKey);
-  await Promise.all([
-    deleteDerivedByPublicUrl(photo.thumbKey),
-    deleteDerivedByPublicUrl(photo.mediumKey),
-    deleteDerivedByPublicUrl(photo.fullKey),
-  ]);
+  await deletePhotoFiles(photo);
 
   return NextResponse.json({ success: true });
 }
