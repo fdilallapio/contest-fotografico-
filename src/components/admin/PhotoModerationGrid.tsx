@@ -145,7 +145,7 @@ export default function PhotoModerationGrid({ themes }: { themes: Theme[] }) {
                 </div>
                 <div className="space-y-2 p-3">
                   <p className="text-xs font-medium text-neutral-300">{photo.theme.name}</p>
-                  <p className="line-clamp-2 text-xs text-neutral-500">{photo.description}</p>
+                  <p className="whitespace-pre-line text-xs text-neutral-500">{photo.description}</p>
                   <p className="truncate text-xs text-neutral-600">
                     {photo.candidate.firstName} {photo.candidate.lastName}
                   </p>
